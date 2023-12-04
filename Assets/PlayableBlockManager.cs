@@ -10,7 +10,8 @@ public class PlayableBlockManager : MonoBehaviour {
 	[SerializeField] private int currentBlockIndex;
 	
 	public GameManager gameManager;
-
+  public BlockGenerator blockGenerator;
+  
 	private Rigidbody2D rigidBody;
 	
 	public BlockColor currentBlockColor;
@@ -33,7 +34,7 @@ public class PlayableBlockManager : MonoBehaviour {
 	private void Start() {
 		rigidBody = GetComponent<Rigidbody2D>();
 		
-		currentBlockColor = (BlockColor)Random.Range(0, 4);
+		currentBlockColor = (BlockColor)Random.Range(0, 5);
 		GetComponent<Image>().color = Palette.BlockColors[(int)currentBlockColor];
 	}
 
@@ -44,7 +45,10 @@ public class PlayableBlockManager : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D col) {
 		//Debug.Log(col.tag);
-		if (col.CompareTag($"Block")) ReturnToRising(col.transform.parent.localPosition);
+		if (col.CompareTag($"Block")) {
+      if(col.GetComponent<Block>().blockColor == currentBlockColor) blockGenerator.DestroyTopBlockLine();
+      else ReturnToRising(col.transform.parent.localPosition);
+    }
 	}
 
 	private void ReturnToRising(Vector3 resetPosition) {

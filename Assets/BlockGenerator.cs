@@ -12,11 +12,13 @@ public class BlockGenerator : MonoBehaviour {
 	public List<BlockLine> blockLines;
 
   private float timeSinceLastSpawn;
-  private const float respawnTime = 5f;
+  private const float respawnTime = 1f;
   
   void Start() {
 		blockLines = new List<BlockLine>();
-    MakeOneBlockLine();
+    for (int i = 0; i < 5; i++) {
+      MakeOneBlockLine();
+    }
   }
 
   private void Update() {
@@ -35,7 +37,7 @@ public class BlockGenerator : MonoBehaviour {
   }
 
   public void DestroyTopBlockLine() {
-    Destroy(blockLines.First().gameObject);
+    Destroy(blockLines[0].gameObject);
     blockLines.RemoveAt(0);
   }
 }

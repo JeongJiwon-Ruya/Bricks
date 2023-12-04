@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 public class BlockLine : MonoBehaviour {
-	public int[] blockColorSet = {0, 1, 2, 3};
+	public int[] blockColorSet = {0, 1, 2, 3, 4};
 	public List<Block> blocks;
   
 
