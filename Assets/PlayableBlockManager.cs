@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
 using Random = UnityEngine.Random;
@@ -33,7 +34,7 @@ public class PlayableBlockManager : MonoBehaviour {
 		rigidBody = GetComponent<Rigidbody2D>();
 		
 		currentBlockColor = (BlockColor)Random.Range(0, 4);
-		Debug.Log(currentBlockColor);
+		GetComponent<Image>().color = Palette.BlockColors[(int)currentBlockColor];
 	}
 
 	public void GravityOn() {
@@ -42,14 +43,15 @@ public class PlayableBlockManager : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D col) {
-		Debug.Log(col.tag);
-		if (col.CompareTag($"Block")) ReturnToRising(col.transform.localPosition);
+		//Debug.Log(col.tag);
+		if (col.CompareTag($"Block")) ReturnToRising(col.transform.parent.localPosition);
 	}
 
 	private void ReturnToRising(Vector3 resetPosition) {
-		Debug.Log("return");
+		/*Debug.Log("return");
+    Debug.Log(resetPosition);*/
 		rigidBody.bodyType = RigidbodyType2D.Static;
 		rising = true;
-		transform.localPosition = new Vector3(resetPosition.x, resetPosition.y+GeneralBlockSetting.BlockSize, resetPosition.z);
+		transform.localPosition = new Vector3(transform.localPosition.x, resetPosition.y+GeneralBlockSetting.BlockSize, resetPosition.z);
 	}
 }
