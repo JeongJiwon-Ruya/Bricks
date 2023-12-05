@@ -4,7 +4,8 @@ using UnityEngine;
 
 public static class GeneralBlockSetting {
 	public const float TravelDuration = 10f;
-	public const float BlockSpeed = 0.015f;
+	public static float BlockSpeed = 0.015f;
+  public static float RespawnTime = 0.8f;
 
 	public const float PlayerBlockMoveDuration = 0.1f;
 	public const int BlockBasePositionX = -400;

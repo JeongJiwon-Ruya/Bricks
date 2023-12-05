@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class BlockGenerator : MonoBehaviour {
+  public GameManager gameManager;
 	public Transform boxPanel;
 	
 	public BlockLine blockPrefab;
@@ -12,9 +14,9 @@ public class BlockGenerator : MonoBehaviour {
 	public List<BlockLine> blockLines;
 
   private float timeSinceLastSpawn;
-  private const float respawnTime = 1f;
   
-  void Start() {
+  
+  void Awake() {
 		blockLines = new List<BlockLine>();
     for (int i = 0; i < 5; i++) {
       MakeOneBlockLine();
@@ -22,7 +24,7 @@ public class BlockGenerator : MonoBehaviour {
   }
 
   private void Update() {
-    if (respawnTime < timeSinceLastSpawn) {
+    if (GeneralBlockSetting.RespawnTime < timeSinceLastSpawn) {
       timeSinceLastSpawn = 0f;
       MakeOneBlockLine();
     } else timeSinceLastSpawn += Time.deltaTime;
@@ -30,14 +32,16 @@ public class BlockGenerator : MonoBehaviour {
 
   private void MakeOneBlockLine() {
     var newLine = Instantiate(blockPrefab, boxPanel);
-    var setYPosition = (blockLines.Count == 0 ? GeneralBlockSetting.BlockSize : blockLines.Last().transform.localPosition.y) - GeneralBlockSetting.BlockSize;
+    var setYPosition = (blockLines.Count == 0 ? GeneralBlockSetting.BlockSize*4 : blockLines.Last().transform.localPosition.y) - GeneralBlockSetting.BlockSize;
     newLine.transform.localPosition = new Vector3(0, setYPosition, 0);
     newLine.Initialize();
 	  blockLines.Add(newLine);
   }
 
   public void DestroyTopBlockLine() {
-    Destroy(blockLines[0].gameObject);
-    blockLines.RemoveAt(0);
+    gameManager.AddScore();
+    var topLine = blockLines[0];
+    topLine.DestroyAnimation();
+    blockLines.Remove(topLine);
   }
 }
