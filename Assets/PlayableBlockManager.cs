@@ -30,7 +30,7 @@ public class PlayableBlockManager : MonoBehaviour {
 
 	private void Update() {
 		if(rising) transform.Translate(0,GeneralBlockSetting.BlockSpeed,0);
-	}
+  }
 	
 	private void Start() {
 		rigidBody = GetComponent<Rigidbody2D>();
@@ -48,6 +48,12 @@ public class PlayableBlockManager : MonoBehaviour {
     if (col.CompareTag($"Block")) {
       if(col.GetComponent<Block>().blockColor == currentBlockColor) blockGenerator.DestroyTopBlockLine();
       else ReturnToRising(col.gameObject);
+      return;
+    }
+
+    if (col.CompareTag("GameOverLine")) {
+      Debug.Log("enter");
+      gameManager.GameOver();
     }
 	}
 
@@ -73,6 +79,7 @@ public class PlayableBlockManager : MonoBehaviour {
     currentBlockColor = (BlockColor)setArray.OrderBy(_ => Guid.NewGuid()).First();
     GetComponent<Image>().DOColor(Palette.BlockColors[(int)currentBlockColor], 0.5f).SetEase(Ease.InBounce);
     GeneralBlockSetting.BlockSpeed += 0.001f;
-    GeneralBlockSetting.RespawnTime -= 0.001f;
+    if (GeneralBlockSetting.RespawnTime < 0.003f) return;
+    GeneralBlockSetting.RespawnTime -= 0.003f;
   }
 }

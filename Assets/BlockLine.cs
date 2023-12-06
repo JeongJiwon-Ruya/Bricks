@@ -18,6 +18,7 @@ public class BlockLine : MonoBehaviour {
 	}
 
 	private void Update() {
+    if (GeneralBlockSetting.gameState == GameState.Over) return;
 		transform.Translate(0,GeneralBlockSetting.BlockSpeed,0);
 	}
   

@@ -14,8 +14,7 @@ public class BlockGenerator : MonoBehaviour {
 	public List<BlockLine> blockLines;
 
   private float timeSinceLastSpawn;
-  
-  
+
   void Awake() {
 		blockLines = new List<BlockLine>();
     for (int i = 0; i < 5; i++) {
@@ -24,6 +23,8 @@ public class BlockGenerator : MonoBehaviour {
   }
 
   private void Update() {
+    if (GeneralBlockSetting.gameState == GameState.Over) return;
+    
     if (GeneralBlockSetting.RespawnTime < timeSinceLastSpawn) {
       timeSinceLastSpawn = 0f;
       MakeOneBlockLine();
@@ -43,5 +44,9 @@ public class BlockGenerator : MonoBehaviour {
     var topLine = blockLines[0];
     topLine.DestroyAnimation();
     blockLines.Remove(topLine);
+  }
+
+  public void GameOverAnimation() {
+    
   }
 }

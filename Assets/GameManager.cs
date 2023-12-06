@@ -6,18 +6,34 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
+public enum GameState {Play, Over}
+
 public class GameManager : MonoBehaviour {
-	[SerializeField]private int currentBlockPosition;
-	public PlayableBlockManager playableBlock;
+  
+  
+  public PlayableBlockManager playableBlock;
 
   public BlockGenerator blockGenerator;
 
   public TextMeshProUGUI scoreBoard;
+
+  public GameObject gameOverPopup;
+  
+  public Transform endLine;
+  private float endLinePosY;
+  
   public int score;
   
   private void Start() {
     Application.targetFrameRate = 60;
-	}
+    GeneralBlockSetting.gameState = GameState.Play;
+    endLinePosY = endLine.position.y;
+  }
+
+  private void Update() {
+    if (GeneralBlockSetting.gameState == GameState.Over) return;
+    if (endLinePosY < playableBlock.transform.position.y) GameOver();
+  }
 
   public void AddScore() {
     score++;
@@ -25,10 +41,15 @@ public class GameManager : MonoBehaviour {
   }
   
 	public void SetBlockPosition(int index) {
-    currentBlockPosition = index;
     if(blockGenerator.blockLines[0].blocks[index].blockColor == playableBlock.currentBlockColor) {
       blockGenerator.DestroyTopBlockLine();
 	    playableBlock.GravityOn();
     }
 	}
+
+  public void GameOver() {
+    gameOverPopup.SetActive(true);
+    GeneralBlockSetting.gameState = GameState.Over;
+    blockGenerator.GameOverAnimation();
+  }
 }
