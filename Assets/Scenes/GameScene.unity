@@ -242,6 +242,7 @@ MonoBehaviour:
   blockGenerator: {fileID: 540678596}
   scoreBoard: {fileID: 1102090553}
   gameOverPopup: {fileID: 125361289}
+  replayButton: {fileID: 1277230038}
   endLine: {fileID: 1148888067}
   score: 0
 --- !u!1 &125361289
@@ -1750,7 +1751,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!224 &1604440823
 RectTransform:

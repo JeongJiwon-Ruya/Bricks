@@ -5,12 +5,12 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum GameState {Play, Over}
 
 public class GameManager : MonoBehaviour {
-  
-  
   public PlayableBlockManager playableBlock;
 
   public BlockGenerator blockGenerator;
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
   public TextMeshProUGUI scoreBoard;
 
   public GameObject gameOverPopup;
+  public Button replayButton;
   
   public Transform endLine;
   private float endLinePosY;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour {
     Application.targetFrameRate = 60;
     GeneralBlockSetting.gameState = GameState.Play;
     endLinePosY = endLine.position.y;
+    replayButton.onClick.AddListener((() => SceneManager.LoadScene("IntroScene")));
   }
 
   private void Update() {
