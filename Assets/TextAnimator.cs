@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -8,9 +9,12 @@ public class TextAnimator : MonoBehaviour {
   public float duration;
   public Ease ease;
   
-  private void Start() {
+  private void Awake() {
     targetText = GetComponent<Text>();
     targetText.text = "";
-    targetText.DOText(inputString, duration).SetEase(ease);
+  }
+
+  public void PlayAnimation(GameObject panel) {
+    targetText.DOText(inputString, duration).SetEase(ease).onComplete += () => panel.SetActive(true); // 나중에 action으로 구현
   }
 }
