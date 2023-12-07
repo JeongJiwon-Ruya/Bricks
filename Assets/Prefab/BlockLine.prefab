@@ -135,6 +135,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8982403264980688602}
     m_Modifications:
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9009434
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9976399
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1028554708749133006, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
       propertyPath: m_Name
       value: Block
@@ -248,6 +260,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8982403264980688602}
     m_Modifications:
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.50060534
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4179868
+      objectReference: {fileID: 0}
     - target: {fileID: 1028554708749133006, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
       propertyPath: m_Name
       value: Block_3
@@ -361,6 +385,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8982403264980688602}
     m_Modifications:
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.82680285
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5330188
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1028554708749133006, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
       propertyPath: m_Name
       value: Block_1
@@ -474,6 +510,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8982403264980688602}
     m_Modifications:
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5801887
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9142635
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1028554708749133006, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
       propertyPath: m_Name
       value: Block_2
@@ -587,6 +635,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8982403264980688602}
     m_Modifications:
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6839622
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028554708749133004, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.76879597
+      objectReference: {fileID: 0}
     - target: {fileID: 1028554708749133006, guid: 75ed3c8fd52a44378a5829a31bba7d1c, type: 3}
       propertyPath: m_Name
       value: Image_1
