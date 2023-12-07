@@ -19,6 +19,17 @@ public class PlayableBlockManager : MonoBehaviour {
 
 	public bool rising = true;
 
+  private void Update() {
+    if(rising) transform.Translate(0,GeneralBlockSetting.BlockSpeed,0);
+  }
+	
+  private void Start() {
+    rigidBody = GetComponent<Rigidbody2D>();
+
+    var firstBlockColor = blockGenerator.blockLines[0].blocks[0].blockColor;
+    SetRandomColor(firstBlockColor);
+  }
+  
 	public void MovePosition(int index) {
 		var movingDistance = Mathf.Abs(currentBlockIndex - index);
 		currentBlockIndex = index;
@@ -27,18 +38,7 @@ public class PlayableBlockManager : MonoBehaviour {
 		transform.DOLocalMoveX(destinationX, GeneralBlockSetting.PlayerBlockMoveDuration * movingDistance).SetEase(Ease.Linear)
 		.OnComplete(() => gameManager.SetBlockPosition(index));
 	}
-
-	private void Update() {
-		if(rising) transform.Translate(0,GeneralBlockSetting.BlockSpeed,0);
-  }
-	
-	private void Start() {
-		rigidBody = GetComponent<Rigidbody2D>();
-
-    var firstBlockColor = blockGenerator.blockLines[0].blocks[0].blockColor;
-    SetRandomColor(firstBlockColor);
-  }
-
+  
 	public void GravityOn() {
 		rising = false;
 		rigidBody.bodyType = RigidbodyType2D.Dynamic;
