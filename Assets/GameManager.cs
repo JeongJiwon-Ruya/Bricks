@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UniRx.Triggers;
 
 public enum GameState {Play, Over}
 
@@ -31,26 +33,34 @@ public class GameManager : MonoBehaviour {
   public Transform endLine;
   private float endLinePosY;
 
-  public Text testtext;
-  
+  [SerializeField]private int currentBestScore;
+  [SerializeField]private bool overBestScore;
   public int score;
-  
+
+  private void Awake() {
+    currentBestScore = PlayerPrefs.GetInt("BESTSCORE");
+  }
+
   private void Start() {
+    this.UpdateAsObservable()
+      .Where(_ => GeneralBlockSetting.gameState == GameState.Play)
+      .Where(_ => endLinePosY < playableBlock.transform.position.y)
+      .Subscribe(_ => GameOver());
+
+    this.UpdateAsObservable()
+    .Where(_ => !overBestScore)
+    .Where(_ => currentBestScore < score)
+    .Subscribe(_ => ChangeScoreBoard());
+    
     Application.targetFrameRate = 60;
     GeneralBlockSetting.gameState = GameState.Play;
     endLinePosY = endLine.position.y;
     replayButton.onClick.AddListener((() => SceneManager.LoadScene("IntroScene")));
   }
 
-  private void Update() {
-    if (GeneralBlockSetting.gameState == GameState.Over) return;
-    if (endLinePosY < playableBlock.transform.position.y) GameOver();
-
-  }
   public void AddScore() {
     score++;
     scoreBoard.text = score.ToString();
-    //scoreBoardResult.text = score.ToString();
   }
   
 	public void SetBlockPosition(int index) {

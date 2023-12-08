@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using UniRx;
 using UnityEngine;
+using UniRx.Triggers;
 
 public class BlockGenerator : MonoBehaviour {
   public GameManager gameManager;
@@ -22,10 +24,14 @@ public class BlockGenerator : MonoBehaviour {
     }
   }
 
-  private void Update() {
-    if (GeneralBlockSetting.gameState == GameState.Over) return;
-    
-    if (GeneralBlockSetting.RespawnTime < timeSinceLastSpawn) {
+  private void Start() {
+    this.UpdateAsObservable()
+    .Where(_ => GeneralBlockSetting.gameState == GameState.Play)
+    .Subscribe(_ => SpawnCounter());
+  }
+
+  private void SpawnCounter() {
+    if (GeneralBlockSetting.respawnTime < timeSinceLastSpawn) {
       timeSinceLastSpawn = 0f;
       MakeOneBlockLine();
     } else timeSinceLastSpawn += Time.deltaTime;

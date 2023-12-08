@@ -4,11 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using UniRx;
+using UniRx.Triggers;
 
 public class BlockLine : MonoBehaviour {
   public int[] blockColorSet = {0, 1, 2, 3, 4};
 	public List<Block> blocks;
-  
+
+  private void Start() {
+    this.UpdateAsObservable()
+    .Where(_ => GeneralBlockSetting.gameState == GameState.Play)
+    .Subscribe(_ => transform.Translate(0, GeneralBlockSetting.blockSpeed, 0));
+  }
 
   public void Initialize() {
 		blockColorSet = blockColorSet.OrderBy(_ => Guid.NewGuid()).ToArray();
@@ -17,11 +24,6 @@ public class BlockLine : MonoBehaviour {
 		}
 	}
 
-	private void Update() {
-    if (GeneralBlockSetting.gameState == GameState.Over) return;
-		transform.Translate(0,GeneralBlockSetting.BlockSpeed,0);
-	}
-  
   public async void DestroyAnimation() {
     var blocks = GetComponentsInChildren<Block>();
     var completeCount = 0;

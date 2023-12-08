@@ -5,6 +5,9 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
+using UniRx;
+using UniRx.Triggers;
+
 
 public class PlayableBlockManager : MonoBehaviour {
 	[SerializeField] private int currentBlockIndex;
@@ -19,11 +22,11 @@ public class PlayableBlockManager : MonoBehaviour {
 
 	public bool rising = true;
 
-  private void Update() {
-    if(rising) transform.Translate(0,GeneralBlockSetting.BlockSpeed,0);
-  }
-	
   private void Start() {
+    this.UpdateAsObservable()
+    .Where(_ => rising)
+    .Subscribe(_ => transform.Translate(0, GeneralBlockSetting.blockSpeed, 0));
+    
     rigidBody = GetComponent<Rigidbody2D>();
 
     var firstBlockColor = blockGenerator.blockLines[0].blocks[0].blockColor;
