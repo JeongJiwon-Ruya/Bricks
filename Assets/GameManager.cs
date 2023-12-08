@@ -18,7 +18,10 @@ public class GameManager : MonoBehaviour {
    * 효과음 넣기 (버튼 클릭음 & 블록 없어질때 효과음)
    * best score 저장, 처리 ( 인게임에서 best score 넘으면 score창 연노랑(+애니메이션)으로 변경)
    */
-  
+
+  public AudioClip blockDestroySound;
+  public AudioClip bestScoreSound;
+  public AudioClip buttonSound;
   
   public PlayableBlockManager playableBlock;
 
@@ -56,12 +59,15 @@ public class GameManager : MonoBehaviour {
     Application.targetFrameRate = 60;
     GeneralBlockSetting.gameState = GameState.Play;
     endLinePosY = endLine.position.y;
+    replayButton.onClick.AddListener((() => AudioSourceManager.instance.PlaySource2(buttonSound)));
     replayButton.onClick.AddListener((() => SceneManager.LoadScene("IntroScene")));
+    
   }
 
   public void AddScore() {
     score++;
     scoreBoard.text = score.ToString();
+    AudioSourceManager.instance.PlaySource1(blockDestroySound);
   }
   
 	public void SetBlockPosition(int index) {
@@ -76,7 +82,7 @@ public class GameManager : MonoBehaviour {
     SetScoreAnimation();
     GeneralBlockSetting.gameState = GameState.Over;
     blockGenerator.GameOverAnimation();
-    PlayerPrefs.SetInt("BESTSCORE", score);
+    if(score > currentBestScore) PlayerPrefs.SetInt("BESTSCORE", score);
   }
 
   private void SetScoreAnimation() {
@@ -85,6 +91,7 @@ public class GameManager : MonoBehaviour {
 
   private void ChangeScoreBoard() {
     overBestScore = true;
+    AudioSourceManager.instance.PlaySource1(bestScoreSound);
     var sequence = DOTween.Sequence()
     .Append(scoreBoard.DOColor(new Color32(255, 239, 0, 255), 0.5f))
     .Join(scoreBoard.transform.DOPunchScale(Vector3.one, 0.5f, 7, 0.5f));

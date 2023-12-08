@@ -14,6 +14,8 @@ public class IntroSceneManager : MonoBehaviour {
   public TextAnimator textAnimator;
   public GameObject bestScorePanel;
 
+  public AudioClip btnSound;
+  
   private void Start() {
     var textUI = bestScorePanel.GetComponent<TextMeshProUGUI>();
     textUI.text = $"Best Score\n{PlayerPrefs.GetInt("BESTSCORE").ToString()}";
@@ -23,6 +25,7 @@ public class IntroSceneManager : MonoBehaviour {
   }
 
   private void StartButtonClick() {
+    AudioSourceManager.instance.PlaySource1(btnSound);
     StaticGameData.initialPlay = true;
     SceneManager.LoadScene("GameScene");
   }

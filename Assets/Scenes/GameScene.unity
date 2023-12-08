@@ -238,6 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ea4cd312a254fc9bcde1a7b658bce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockDestroySound: {fileID: 8300000, guid: 6e07d9bba4c954a1698ec11ed6b40500, type: 3}
+  bestScoreSound: {fileID: 8300000, guid: 77319a3949b4941349f0b8e151355590, type: 3}
+  buttonSound: {fileID: 8300000, guid: f6e207dbddb9446e1abfdfd18b67570e, type: 3}
   playableBlock: {fileID: 2004476121}
   blockGenerator: {fileID: 540678596}
   scoreBoard: {fileID: 1102090553}
@@ -245,6 +248,8 @@ MonoBehaviour:
   gameOverPopup: {fileID: 125361289}
   replayButton: {fileID: 1277230038}
   endLine: {fileID: 1148888067}
+  currentBestScore: 0
+  overBestScore: 0
   score: 0
 --- !u!1 &125361289
 GameObject:
