@@ -14,7 +14,7 @@ public class TextAnimator : MonoBehaviour {
     targetText.text = "";
   }
 
-  public void PlayAnimation(GameObject panel) {
-    targetText.DOText(inputString, duration).SetEase(ease).onComplete += () => panel.SetActive(true); // 나중에 action으로 구현
+  public void PlayAnimation(TweenCallback action) {
+    targetText.DOText(inputString, duration).SetEase(ease).OnComplete(action);
   }
 }

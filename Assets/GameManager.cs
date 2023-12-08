@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
   public int score;
 
   private void Awake() {
+    GeneralBlockSetting.Initialize();
     currentBestScore = PlayerPrefs.GetInt("BESTSCORE");
   }
 
@@ -75,9 +76,19 @@ public class GameManager : MonoBehaviour {
     SetScoreAnimation();
     GeneralBlockSetting.gameState = GameState.Over;
     blockGenerator.GameOverAnimation();
+    PlayerPrefs.SetInt("BESTSCORE", score);
   }
 
-  public void SetScoreAnimation() {
+  private void SetScoreAnimation() {
     DOTween.To(() => 0, x => scoreBoardResult.text = x.ToString(), score, 2.0f).SetEase(Ease.OutCirc);
+  }
+
+  private void ChangeScoreBoard() {
+    overBestScore = true;
+    var sequence = DOTween.Sequence()
+    .Append(scoreBoard.DOColor(new Color32(255, 239, 0, 255), 0.5f))
+    .Join(scoreBoard.transform.DOPunchScale(Vector3.one, 0.5f, 7, 0.5f));
+    sequence.Play();
+
   }
 }

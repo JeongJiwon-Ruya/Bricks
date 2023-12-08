@@ -81,7 +81,7 @@ public class PlayableBlockManager : MonoBehaviour {
     
     currentBlockColor = (BlockColor)setArray.OrderBy(_ => Guid.NewGuid()).First();
     GetComponent<Image>().DOColor(Palette.BlockColors[(int)currentBlockColor], 0.5f).SetEase(Ease.InBounce);
-    GeneralBlockSetting.BlockSpeed += 0.001f;
+    GeneralBlockSetting.blockSpeed += 0.001f;
     
   }
 }
